@@ -1,38 +1,36 @@
 II. RELATED WORK
 
-In this section, we will review related work on ©6ntel6sy
-
-(visualization, document (collection) (iswalization, ontology
-
+In this section, we will review related work on ontology
+visualization, document (collection) visualization, ontology-
 based retrieval and visual query formulation support.
 
 A. Ontology Visualization
 
-Visualizing (Ontologies as a graph of interlinked Qaim 1s
-common practice. The well-known (Ontology) editor Protégé!
+Visualizing ontologies as a graph of interlinked concepts is
+common practice. The well-known ontology editor Protégé!
 provides the OntoGraf plugin, which helps the creator of an
-(ontology to get an overview of existing classes, properties
-and entities. In general, graph Mistializations of ontolos
-are often rendered in a force-directed or hierarchical jamout
-[4]. Several MiswaliZatiGhs for Ontologies) have been proposed
+ontology to get an overview of existing classes, properties
+and entities. In general, graph visualizations of ontologies
+are often rendered in a force-directed or hierarchical layout
+[4]. Several visualizations for ontologies have been proposed
 recently, including node-link diagrams, treemaps, or UML
-class dragrams. Lohmann et al. propose Visual Notation for
-OWL (Ontologies) (VOWL), a visual language for Ontology)
+class diagrams. Lohmann et al. propose Visual Notation for
+OWL Ontologies (VOWL), a visual language for ontology
 representation [5]. The specification defines graphical prim-
 itives, color schemes and visual elements. VOWL has been
-implemented as a Protégé aa and a standalone Web tool.
-Psyllidis stated that most Ontology ations are desktop-
-based and require a certain set "of skills from the user [6].
+implemented as a Protégé plugin and a standalone Web tool.
+Psyllidis stated that most ontology visualizations are desktop-
+based and require a certain set of skills from the user [6].
 The author proposes OSMoSys, a Web interface enabling a
-graph-based Misualization of RDF data and Ontology browsing.
+graph-based visualization of RDF data and ontology browsing.
 An experimental prototype was deployed for smart cities
 applications to exemplify its potential.
 
 B. Document (Collection) Visualization
-The objective of a proper WiSWalization of a document
 
+The objective of a proper visualization of a document
 collection should be to give a holistic view of the collec-
-tion [1]. Such WiswalizatiGfis have been proposed in different
+tion [1]. Such visualizations have been proposed in different
 domains. Padia et al. present different strategies to visualize
 digital collections at Archive-It, a subscription service from
 the Internet Archive [7]. Xu et al. suggest an interactive
@@ -40,79 +38,49 @@ visual analytics application to help archivists analyze large-
 scale digital collections [8]. Bergstr6m and Atkinson state
 that web-based digital libraries fail to show the context in
 which a scientific paper is situated [9]. The authors propose
-PaperCube, a set of Mi8W@alizatiGhs to augment the exploration
+PaperCube, a set of visualizations to augment the exploration
 capabilities of digital libraries. Windhager et al. perform a
-review of WiSwalizatiGn approaches for digital cultural heritage
+review of visualization approaches for digital cultural heritage
 collections [10]. Another broad overview of current research
-on document (collection) WiSWaliZaHGM is provided by Gan et
+on document (collection) visualization is provided by Gan et
 al. [11]. There exist also commercial document management
 systems and personal information managers such as DEVON-
 think? or Keep It°.
 
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
-logy-based Retrieval & Visual Query Formulation
-
+C. Ontology-based Retrieval & Visual Query Formulation
 Support
 
-Kim et al. propose Ontalk, an ©ntology-based document
+Kim et al. propose Ontalk, an ontology-based document
 management and retrieval tool [2]. The tool generates metadata
-ao a resource in a semi-automatic way and provides an
-Ontology-based search engine. Zhuhadar et al. describe a
-visual @ntology- based information retrieval system for the
+for a resource in a semi-automatic way and provides an
+ontology-based search engine. Zhuhadar et al. describe a
+visual ontology-based information retrieval system for the
 
- 
-
- 
-
-'https://protege.stanford.edu/
+"https://protege.stanford.edu/
 *https://www.devontechnologies.com/products/devonthink/
 >https://reinventedsoftware.com/keepit/
 
 HyperManyMedia platform [12]. Clicking on a node in the
-graph representation of their Ontology)is considered as a query
+graph representation of their ontology is considered as a query
 and updates the search results. Alhenshiri et al. state that the
 search relevance may be improved by integrating the user in
 the process of query reformulation [13]. The authors present
 an interactive Visual Search Engine (VSE) which visualizes
 the query reformulation and results presentation. Soylu et al.
-review different strategies of Ontology-based end-user visual
+review different strategies of ontology-based end-user visual
 query formulation [14]. Munir and Anjum emphasize that
-existing database WiswalizatiGn) tools do not help in semantic
-data retrieval [15]. Instead, GNf6l6E¥-based interactive query
+existing database visualization tools do not help in semantic
+data retrieval [15]. Instead, ontology-based interactive query
 formulation systems can retrieve data from databases in a
 visual and semantically enhanced way, easing the human-
 computer communication.
 
- 
-
- 
-
- 
-
-YGY) COVERAGE TOOL & DOCUMENT
-
+III. ONTOLOGY COVERAGE TOOL & DOCUMENT
 BROWSER
 
 As indicated in the previous section, our work is related
-to the disciplines of ontology }, document (collec-
-tion) ontology based retrieval and visual query
+to the disciplines of ontology visualization, document (collec-
+tion) visualization, ontology-based retrieval and visual query
 formulation support. However, previous work did not approach
 the challenges particular to the field of e-learning. Foremost,
 students shall be enabled to quickly pinpoint documents rel-
@@ -121,48 +89,31 @@ Meno’s paradox of inquiry. Teachers, on the other side, shall
 be given an overview of which topics have or have not been
 covered in the provided collection of learning resources.
 
- 
-
- 
-
 In this section, we will present our tool which allows to
-browse through both the Gnt6l6gsy and the learning material
+browse through both the ontology and the learning material
 collection while giving an idea which topics are well or less
 covered. We assume that the comprised documents have been
-annotated and indexed with well-defined semantic Concepts: In
+annotated and indexed with well-defined semantic concepts. In
 the upcoming example, these resources come from the domain
-of computer Pro granuung and are annotated with concepts
-from the ALMA @ntology, a lightweight modular Ontology for
-programming sduddtion [16]. These annotations could either
+of computer programming and are annotated with concepts
+from the ALMA ontology, a lightweight modular ontology for
+programming education [16]. These annotations could either
 have been done in a manual way, or through a semi-automatic
 entity linking process [17].
 
- 
-
-   
-
 The tool has been implemented in form of a web application
 which makes use of D3.js*, a JavaScript library for data-
-driven dc nts, in order to visualize the data retrieved
+driven documents, in order to visualize the data retrieved
 from the ALMA ontology via API calls. The tool transposes
-
-ontology) scheme into a force-directed graph where every
-a its corresponding label is represented by a circle
+an ontology scheme into a force-directed graph where every
+concept and its corresponding label is represented by a circle
 respectively a text SVG element. The user can interact with
-the Wisualization by clicking on the different Concept circles
-to navigate through the ntol6gy) scheme so that he or she
+the visualization by clicking on the different concept circles
+to navigate through the ontology scheme so that he or she
 can retrieve the desired resources which are represented by
 rectangular SVG elements and related to one or more concepts.
 Moreover, visual indicators like distinct coloring of the circles
-or icons attached to GOncééepts) are meant to ease this navigation
+or icons attached to concepts are meant to ease this navigation
 process.
-
- 
-
- 
-
- 
-
- 
 
 *+https://d3js.org

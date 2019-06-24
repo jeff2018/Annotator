@@ -4,7 +4,7 @@ from flask import Flask,render_template, flash, request, redirect, url_for, send
 from werkzeug.utils import secure_filename
 from analysePDF import processPDF
 from modeldb import *
-from annotation import spotlight, babelfy, augmentedResults
+from annotation import spotlight, babelfy
 from graph import graph, avgDegree, filteredResults
 
 windows = "C:\\Users\kylek\PycharmProjects\Annotator/uploads"
@@ -22,6 +22,47 @@ app.secret_key = '5d3bae549ae7c89b2d1be949'
 
 
 def analysis(text):
+    results=[]
+    #print("Original text:", text)
+
+    spotlightResults = spotlight(text)
+    babelfyResults = babelfy(text)
+
+
+    graphResults, initialConcepts = graph(spotlightResults, babelfyResults)
+    # for g in graphResults:
+    # print(g)
+    # print()
+    topTen = graphResults[:10]
+    for t in topTen:
+        t['frequency'] = ""
+        # print(t)
+        if t['camino'] == 'False':
+            for i in initialConcepts:
+                ending = i[0].rsplit('/', 1)[1]
+                resource = "dbr:" + ending
+
+                freq = i[1]
+                # print(resource,t['label'])
+                if resource == t['label']:
+                    # print("as true")
+                    t['frequency'] = freq
+        else:
+            oldSources = t['sources']
+            t['sources'] = [s['label'] for s in topTen if s['label'] in oldSources]
+            newSources = t['sources']
+            t['frequency'] = 0
+            for s in topTen:
+                if s['label'] in newSources:
+                    t['frequency'] += s['frequency']
+            avgFreg = int(round(t['frequency'] / len(t['sources'])))
+            t['frequency'] = avgFreg
+        results.append(t)
+        #print(t)
+
+
+
+    '''
     #print("Original text:", text)
 
     spotlightResults, spotlightResultsAugmented = spotlight(text)
@@ -39,7 +80,7 @@ def analysis(text):
 
     avg = avgDegree(results)
     #print("---filteredResults---")
-    results =filteredResults(results, avg)
+    results =filteredResults(results, avg)'''
     return results
 
 
@@ -70,9 +111,10 @@ def process_txtfile():
 
                             concepts = analysis(transcription)
                             for con in concepts:
+                                print(con)
                                 resource = con['label']
                                 print("resource: "+str(resource))
-                                words = con['word']
+                                #words = con['word']
                                 con_exist = Concept.query.filter_by(name=resource).first()
                                 print("Before none:" + str(con_exist))
                                 if con_exist == None:
@@ -82,26 +124,68 @@ def process_txtfile():
                                     print(new_concept,resource)
                                     con_exist = Concept.query.filter_by(name=new_concept.name).first()
                                     print("After none:" + str(con_exist))
-                                page.concepts.append(con_exist)
+
+                                cp = ConceptPages()
+                                #cp.concept_id=con_exist.id
+                                cp.degree=con['degree']
+                                cp.pagerank=con['pagerank']
+                                cp.camino = con['camino']
+                                cp.frequency =con['frequency']
+                                   # degree=, pagerank=con_exist['pagerank'],
+                                  #                camino=con_exist['camino'], frequency=con_exist['frequency'])
+                                cp.page = page
+                                cp.concept=con_exist
+                                con_exist.pages.append(cp)
+                                #page.concepts.append(con_exist)
+                                if con['camino'] == 'True':
+                                    print("enter camino")
+                                    sources = con['sources']
+                                    print(sources)
+                                    for s in sources:
+                                        source = Concept.query.filter_by(name=s).first()
+                                        print(source.id,con_exist.id,con_exist.name)
+
+                                        link_exist = Link.query.filter_by(source_id=source.id,
+                                                                          target_id=con_exist.id).first()
+                                        print(link_exist)
+                                        if link_exist==None:
+                                            new_link = Link(source_id=source.id,target_id=con_exist.id)
+                                            db.session.add(new_link)
+                                            print(new_link.source_id,new_link.target_id )
+                                            link_exist = Link.query.filter_by(source_id=new_link.source_id,
+                                                                              target_id=new_link.target_id).first()
+                                            print("After none:" + str(link_exist))
+
+                                            #db.session.add(link_exist)
+                                '''
                                 for word in words:
                                     word_exist = Word.query.filter_by(name=word,id_concept=con_exist.id).first()
                                     if word_exist == None:
                                         new_word = Word(name=word)
                                         new_word.id_concept=con_exist.id
                                         db.session.add(new_word)
+                                '''
 
         db.session.commit()
+
         annotations = db.session.query(Concept).filter(pdf_concepts.c.pdf_id == f.id).all()
         dict = [ object_as_dict(row) for row in annotations ]
+        print(dict)
+
         for d in dict:
             c_id = d['id']
+            d['pages']=[]
             print(d,c_id)
-            pages = db.session.query(Page).join(concept_pages).filter(concept_pages.c.concept_id == c_id and Page.id_pdf==f.id).all()
-            print(pages)
+            #pages = db.session.query(ConceptPages).join(Page).filter()
+            pages = db.session.query(Page).join(ConceptPages).filter(ConceptPages.concept_id == c_id and Page.id_pdf==f.id).all()
+            for pa in pages:
+                d["pages"].append("Page "+pa.number)
+
 
         print(dict)
-        res = make_response(jsonify(dict), 200)
+        #res = make_response(jsonify(dict), 200)
 
+        res = "ok"
         return res
 
 

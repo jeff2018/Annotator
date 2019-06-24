@@ -35,8 +35,13 @@ class PDFDocument(db.Model):
         return '<PDF %r>' % self.name
 
 class Concept(db.Model):
+    __tablename__= 'concept'
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128))
+    group = db.Column(db.String(128))
+
+    pages = db.relationship('ConceptPages',back_populates='concept')
     words =db.relationship('Word', backref='concept', lazy='dynamic')
 
     def __init__(self, name):
@@ -49,16 +54,44 @@ class Concept(db.Model):
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
+class ConceptPages(db.Model):
+    __tablename__= 'concept_pages'
+    concept_id = db.Column(db.Integer, db.ForeignKey('concept.id'),primary_key=True)
+    page_id = db.Column(db.Integer, db.ForeignKey('page.id'),primary_key=True)
+    degree = db.Column(db.Float(64))
+    pagerank = db.Column(db.Float(64))
+    camino = db.Column(db.String(64))
+    frequency = db.Column(db.Integer)
+    concept = db.relationship("Concept", back_populates="pages")
+    page = db.relationship("Page", back_populates="concepts")
+
+
+'''
 concept_pages = db.Table('concept_pages',
                          db.Column('concept_id', db.Integer, db.ForeignKey('concept.id')),
-                         db.Column('page_id', db.Integer, db.ForeignKey('page.id')))
+                         db.Column('page_id', db.Integer, db.ForeignKey('page.id')),
+                         db.Column('degree ', db.Float),
+                        db.Column('pagerank ', db.Float),
+                        db.Column('camino ', db.Boolean),
+                         db.Column('frequency ', db.Float))'''
+
+class Link(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    source_id = db.Column(db.Integer)
+    target_id= db.Column(db.Integer)
+
+    def __init__(self, source_id,target_id):
+        self.source_id = source_id
+        self.target_id = target_id
+
 
 class Page(db.Model):
+    __tablename__= 'page'
+
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.String(128))
     path = db.Column(db.String(128))
-    concepts = db.relationship('Concept', secondary=concept_pages,
-                                backref=db.backref('pages', lazy='dynamic'))
+    concepts = db.relationship('ConceptPages',back_populates='page')
 
 
     id_pdf = db.Column(db.Integer, db.ForeignKey('pdf_document.id'))

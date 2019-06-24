@@ -1,5 +1,4 @@
-‘Coverage Tool and Document Browser
-
+Ontology Coverage Tool and Document Browser
 for Learning Material Exploration
 
 Christian Grévisse, Jeff Meder, Jean Botev and Steffen Rothkugel
@@ -15,9 +14,9 @@ formulation support and semantic information. Implicit links
 between documents are hardly understood without a proper
 visualization. On the other hand, it is difficult for teachers
 to keep track of the topics covered by a large collection. In
-this paper, we present an GntolOgy coverage tool and document
+this paper, we present an ontology coverage tool and document
 browser for learning material exploration. Both learners and
-teachers can benefit from a visualization of an OGntology
+teachers can benefit from a visualization of an ontology and the
 documents related to the comprised concepts, overcoming the
 limitations of traditional file explorers. Guiding users through
 a visual query process, learners can quickly pinpoint relevant
@@ -28,14 +27,8 @@ enhance the workflow of learners. Finally, teachers are provided
 an overview of topic coverage within the collection.
 
 Index Terms—Document Collection Visualization; Learning
-Material; Visual Query Support; O Fy) Coverage; Document
+Material; Visual Query Support; Ontology Coverage; Document
 Browser.
-
- 
-
- 
-
- 
 
 I. INTRODUCTION
 
@@ -64,14 +57,10 @@ successful query is hampered both by the mentioned paradox
 of inquiry and the ambiguity of natural language. Latter issue
 
 can be overcome by annotating learning material with semantic
-web technologies, such as On s} Even the use of concepts
-from lightweight Ontologies) can lower the risk of ambiguity
+web technologies, such as ontologies. Even the use of concepts
+from lightweight ontologies can lower the risk of ambiguity
 
 [3].
-
- 
- 
- 
 
 From a teacher’s point of view, learning material provided in
 a course ideally covers all the topics belonging to the learning
@@ -86,11 +75,10 @@ or the granularity of a study domain, it may quickly become
 difficult to keep track of the already covered and still to be
 covered topics.
 
-In this paper, we present an Ont6l6gy) coverage tool and
+In this paper, we present an ontology coverage tool and
 document browser for learning material exploration. Both
 learners and teachers can benefit from a visualization of an
-
-tology) and the documents related to the comprised concepts.
+ontology and the documents related to the comprised concepts.
 Implicit links between concepts or documents can be grasped
 easier in such a visualization than in a traditional file system.
 In addition, query formulation is fostered through a visual
@@ -101,16 +89,10 @@ paradox. Learners are enabled to quickly pinpoint resources
 relevant to their ad-hoc study necessities from the vast corpus,
 which may reduce the information overload and improve their
 work flow. Teachers, on the other hand, are given an overview
-of which Ontology concepts have already been covered by the
+of which ontology concepts have already been covered by the
 provided learning material and which still need to be covered.
 Our approach has been implemented as a web application
 using the D3.js JavaScript library.
-
- 
-
- 
-
- 
 
 The remainder of this paper is organized as follows: in
 section II, we discuss related work from different research
